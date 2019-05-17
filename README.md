@@ -8,6 +8,7 @@ This repository contains all materials related to my talk *"A bug's life: story 
 Related links:
 
 https://techblog.mediaservice.net/2019/05/raptor-at-infiltrate-2019/ (blog post)
+
 https://vimeo.com/335197685 (video)
 
 ## advisory
