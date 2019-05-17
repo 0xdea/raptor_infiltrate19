@@ -1,0 +1,115 @@
+@Mediaservice.net (Cybaze Group) Security Advisory #2019-01 (updated on 2019-05-08)
+
+         Title:	Local privilege escalation via CDE dtprintinfo
+   Application:	Common Desktop Environment 2.3.0 and earlier
+     Platforms:	Oracle Solaris 10 1/13 (Update 11) and earlier
+		Other platforms are potentially affected (see below)
+   Description:	A local attacker can gain root privileges by exploiting
+		a buffer overflow in CDE dtprintinfo
+        Author:	Marco Ivaldi <marco.ivaldi@mediaservice.net>
+   Contributor:	Dave Aitel <dave.aitel@cyxtera.com> (original discovery)
+ Vendor Status:	<secalert_us@oracle.com> notified on 2019-05-05
+		<cdesktopenv-devel@lists.sourceforge.net> notified on 2019-05-05
+           CVE:	The Common Vulnerabilities and Exposures project has not assigned
+		a name to this issue yet
+    References: https://lab.mediaservice.net/advisory/2019-01-cde-dtprintinfo.txt
+		https://github.com/0xdea/raptor_infiltrate19
+		https://sourceforge.net/p/cdesktopenv/wiki/Home/
+		https://www.oracle.com/technetwork/server-storage/solaris10/
+		https://www.mediaservice.net/
+		https://infiltratecon.com/
+
+1. Abstract.
+
+A buffer overflow in the DtPrinterAction::PrintActionExists() function in the
+Common Desktop Environment 2.3.0 and earlier, as used in Oracle Solaris 10 1/13
+(Update 11) and earlier, allows local users to gain root privileges via a long
+printer name passed to dtprintinfo by a malicious lpstat program.
+
+Note that Oracle Solaris CDE is based on the original CDE 1.x train, which is
+different from the CDE 2.x codebase that was later open sourced. Most notably,
+the vulnerable buffer in the Oracle Solaris CDE is stack-based, while in the
+open source version it is heap-based.
+
+This is a 0day vulnerability demonstrated at #INFILTRATE19 on May 2nd, 2019 in
+the talk "A bug's life: story of a Solaris 0day".
+
+2. Example Attack Session.
+
+bash-3.2$ cat /etc/release
+                    Oracle Solaris 10 1/13 s10x_u11wos_24a X86
+  Copyright (c) 1983, 2013, Oracle and/or its affiliates. All rights reserved.
+                            Assembled 17 January 2013
+bash-3.2$ uname -a
+SunOS nostalgia 5.10 Generic_147148-26 i86pc i386 i86pc
+bash-3.2$ id
+uid=54322(raptor) gid=1(other)
+bash-3.2$ gcc raptor_dtprintname_intel.c -o raptor_dtprintname_intel -Wall
+bash-3.2$ ./raptor_dtprintname_intel 192.168.1.1:0
+raptor_dtprintname_intel.c - dtprintinfo 0day, Solaris/Intel
+Copyright (c) 2004-2019 Marco Ivaldi <raptor@0xdeadbeef.info>
+
+Using SI_PLATFORM       : i86pc (5.10)
+Using stack base        : 0x8047fff
+Using rwx_mem address   : 0xfeffa004
+Using sc address        : 0x8047f60
+Using strcpy() address  : 0xfefe26a0
+
+lpstat called with -v
+lpstat called with -v
+lpstat called with -d
+# id
+uid=0(root) gid=1(other)
+
+3. Affected Platforms.
+
+All platforms shipping the Common Desktop Environment are potentially affected.
+This includes:
+
+* Oracle Solaris 10 1/13 (Update 11) and earlier [default installation]
+
+According to the CDE Wiki, the following platforms are officially supported:
+
+* All Official Ubuntu variants 12.04 - 18.04
+* Debian 6, 7, 8, 9
+* Fedora 17 at least
+* Archlinux
+* Red Hat
+* Slackware 14.0
+* OpenBSD
+* NetBSD
+* FreeBSD 9.2, 10.x, 11.x
+* openSUSE Tumbleweed (gcc7)
+* openSUSE Leap 4.2 (gcc4)
+* SUSE 12 SP3 (gcc4)
+* Solaris, OpenIndiana
+
+4. Fix.
+
+The maintainers of the open source CDE 2.x version have issued the following
+patches for this vulnerability:
+
+https://sourceforge.net/p/cdesktopenv/code/ci/30cd56ac389fbab521c52669a3bd25041d4e1df1/
+https://sourceforge.net/p/cdesktopenv/code/ci/05d231606ebe3658712a36017d16ec3cc349145d/
+https://sourceforge.net/p/cdesktopenv/code/ci/d59ec197e5307ad9650b6518dba67b7ef388f053/
+
+Oracle, which maintains a different CDE codebase based on the 1.x train, is 
+investigating the issue via tracking# S1153109 and is expected to release a fix
+for all affected-supported versions of Solaris via their quarterly Critical
+Patch Update (CPU) program.
+
+As a temporary workaround, it is possible to remove the setuid bit from the 
+dtprintinfo executable as follows:
+
+bash-3.2# chmod -s /usr/dt/bin/dtprintinfo
+
+5. Proof of Concept.
+
+An exploit for Oracle Solaris 10 1/13 (Update 11) Intel has been developed as a
+proof of concept. Exploits for other Solaris versions and for the SPARC
+architecture are also available. All exploits can be downloaded from:
+
+https://github.com/0xdea/raptor_infiltrate19/
+https://github.com/0xdea/exploits/
+
+Copyright (c) 2019 @Mediaservice.net (Cybaze Group). All rights reserved.
