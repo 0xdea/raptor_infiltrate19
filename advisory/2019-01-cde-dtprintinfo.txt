@@ -1,17 +1,17 @@
-@Mediaservice.net (Cybaze Group) Security Advisory #2019-01 (updated on 2019-05-08)
+@Mediaservice.net (Cybaze Group) Security Advisory #2019-01 (updated on 2019-07-11)
 
          Title:	Local privilege escalation via CDE dtprintinfo
    Application:	Common Desktop Environment 2.3.0 and earlier
      Platforms:	Oracle Solaris 10 1/13 (Update 11) and earlier
 		Other platforms are potentially affected (see below)
-   Description:	A local attacker can gain root privileges by exploiting
-		a buffer overflow in CDE dtprintinfo
+   Description:	A local attacker can gain root privileges by exploiting a 
+   		buffer overflow in CDE dtprintinfo
         Author:	Marco Ivaldi <marco.ivaldi@mediaservice.net>
    Contributor:	Dave Aitel <dave.aitel@cyxtera.com> (original discovery)
  Vendor Status:	<secalert_us@oracle.com> notified on 2019-05-05
 		<cdesktopenv-devel@lists.sourceforge.net> notified on 2019-05-05
-           CVE:	The Common Vulnerabilities and Exposures project has not assigned
-		a name to this issue yet
+           CVE:	The Common Vulnerabilities and Exposures project has assigned
+		the name CVE-2019-2832 to this issue
     References: https://lab.mediaservice.net/advisory/2019-01-cde-dtprintinfo.txt
 		https://github.com/0xdea/raptor_infiltrate19
 		https://sourceforge.net/p/cdesktopenv/wiki/Home/
@@ -93,13 +93,13 @@ https://sourceforge.net/p/cdesktopenv/code/ci/30cd56ac389fbab521c52669a3bd25041d
 https://sourceforge.net/p/cdesktopenv/code/ci/05d231606ebe3658712a36017d16ec3cc349145d/
 https://sourceforge.net/p/cdesktopenv/code/ci/d59ec197e5307ad9650b6518dba67b7ef388f053/
 
-Oracle, which maintains a different CDE codebase based on the 1.x train, is 
-investigating the issue via tracking# S1153109 and is expected to release a fix
-for all affected-supported versions of Solaris via their quarterly Critical
-Patch Update (CPU) program.
+Oracle, which maintains a different CDE codebase based on the 1.x train, has
+assigned the tracking# S1153109 and has released a fix for all affected and
+supported versions of Solaris in their Critical Patch Update (CPU) of July
+2019.
 
-As a temporary workaround, it is possible to remove the setuid bit from the 
-dtprintinfo executable as follows:
+As a temporary workaround, it is also possible to remove the setuid bit from
+the dtprintinfo executable as follows:
 
 bash-3.2# chmod -s /usr/dt/bin/dtprintinfo
 
