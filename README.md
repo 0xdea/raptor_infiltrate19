@@ -22,6 +22,7 @@ https://vimeo.com/335197685 (video)
 * [**raptor/raptor_dtprintname_intel.c**](https://github.com/0xdea/raptor_infiltrate19/blob/master/exploits/raptor/raptor_dtprintname_intel.c). CDE dtprintinfo 0day exploit for Solaris/Intel (2019).
 * [**raptor/raptor_dtprintname_sparc.c**](https://github.com/0xdea/raptor_infiltrate19/blob/master/exploits/raptor/raptor_dtprintname_sparc.c). CDE dtprintinfo 0day exploit for Solaris/SPARC (2004).
 * [**raptor/raptor_dtprintname_sparc2.c**](https://github.com/0xdea/raptor_infiltrate19/blob/master/exploits/raptor/raptor_dtprintname_sparc2.c). CDE dtprintinfo 0day exploit for Solaris/SPARC with noexec stack (2004).
+* [**raptor/raptor_dtprintname_sparc3.c**](https://github.com/0xdea/raptor_infiltrate19/blob/master/exploits/raptor_dtprintname_sparc3.c). Revised CVE-2019-2832 exploit (2020).
 * [**dave/**\*](https://github.com/0xdea/raptor_infiltrate19/tree/master/exploits/dave). Original exploits for Solaris CDE dtprintinfo written by Dave Aitel during his time at @stake (2001).
 * [**bas/aix_ppc_dtprintinfo.c**](https://github.com/0xdea/raptor_infiltrate19/blob/master/exploits/bas/aix_ppc_dtprintinfo.c). A bonus exploit for IBM AIX CDE dtprintinfo (thanks for sharing this, Bas!).
 * [**bas/sol_sparc_dtp.c**](https://github.com/0xdea/raptor_infiltrate19/blob/master/exploits/bas/sol_sparc_dtp.c). Another CDE dtprintinfo 0day exploit for Solaris/SPARC, also courtesy of Bas.
