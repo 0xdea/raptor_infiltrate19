@@ -14,7 +14,7 @@ This repository contains all materials related to my talk *"A bug's life: story 
 
 ## Related links
 
-* <https://web.archive.org/web/20200518045907/https://techblog.mediaservice.net/2019/05/raptor-at-infiltrate-2019/> (blog)  
+* <https://web.archive.org/web/20200518045907/https://techblog.mediaservice.net/2019/05/raptor-at-infiltrate-2019/> (blog)
 * <https://vimeo.com/335197685> (video)
 
 ## Party pack
